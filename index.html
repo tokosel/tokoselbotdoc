@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tokosel - Chatbot Bancaire Intelligent | Documentation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'sg-red': '#E9041E',
+                        'sg-black': '#000000',
+                        'sg-grey': '#4A4A4A',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #E9041E 0%, #000000 100%); }
+        .glass { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(233, 4, 30, 0.2); }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-sg-red rounded-full flex items-center justify-center">
+                        <span class="text-white text-2xl font-bold">🔴</span>
+                    </div>
+                    <span class="text-2xl font-bold text-sg-black">Tokosel</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#features" class="text-sg-grey hover:text-sg-red transition">Fonctionnalités</a>
+                    <a href="#architecture" class="text-sg-grey hover:text-sg-red transition">Architecture</a>
+                    <a href="#installation" class="text-sg-grey hover:text-sg-red transition">Installation</a>
+                    <a href="#documentation" class="text-sg-grey hover:text-sg-red transition">Documentation</a>
+                </div>
+                <a href="https://github.com/tokosel/chatbot-bancaire" target="_blank" 
+                   class="bg-sg-red text-white px-6 py-2 rounded-lg hover:bg-red-700 transition">
+                    GitHub
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg pt-32 pb-20 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="inline-block mb-4">
+                    <span class="bg-white/20 text-white px-4 py-2 rounded-full text-sm font-semibold">
+                        v2.0.0 - Décembre 2025
+                    </span>
+                </div>
+                <h1 class="text-5xl md:text-7xl font-extrabold mb-6">
+                    Tokosel
+                </h1>
+                <p class="text-2xl md:text-3xl mb-8 text-gray-200">
+                    Chatbot Bancaire Intelligent
+                </p>
+                <p class="text-xl md:text-2xl mb-12 max-w-3xl mx-auto text-gray-300">
+                    Assistant virtuel multicanal pour la Société Générale Sénégal, propulsé par l'IA générative et le RAG
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#installation" 
+                       class="bg-white text-sg-red px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 transition">
+                        📚 Commencer
+                    </a>
+                    <a href="https://drive.google.com/file/d/1oDfbizozkkkQTEE-uDSALUKykN7Ni1MZ/view?usp=sharing" target="_blank" 
+                       class="glass border-2 border-white text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-white/20 transition">
+                        ▶️ Voir la démo
+                    </a>
+                </div>
+                <div class="mt-12 flex justify-center gap-4">
+                    <img src="https://img.shields.io/badge/Python-3.8+-blue.svg" alt="Python" class="h-6">
+                    <img src="https://img.shields.io/badge/FastAPI-0.104+-green.svg" alt="FastAPI" class="h-6">
+                    <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License" class="h-6">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-sg-black mb-4">🌟 Fonctionnalités Principales</h2>
+                <p class="text-xl text-sg-grey">Une solution complète pour automatiser les interactions bancaires</p>
+            </div>
+
+            <!-- Interaction Multicanal -->
+            <div class="grid md:grid-cols-3 gap-8 mb-16">
+                <div class="bg-gray-50 p-8 rounded-xl card-hover">
+                    <div class="text-4xl mb-4">💬</div>
+                    <h3 class="text-xl font-bold mb-3 text-sg-black">Interface Web</h3>
+                    <p class="text-sg-grey">Chat texte et vocal intégré</p>
+                </div>
+                <div class="bg-gray-50 p-8 rounded-xl card-hover">
+                    <div class="text-4xl mb-4">📱</div>
+                    <h3 class="text-xl font-bold mb-3 text-sg-black">WhatsApp</h3>
+                    <p class="text-sg-grey">Texte + audio via Twilio</p>
+                </div>
+                <div class="bg-gray-50 p-8 rounded-xl card-hover">
+                    <div class="text-4xl mb-4">🎤</div>
+                    <h3 class="text-xl font-bold mb-3 text-sg-black">Support Audio</h3>
+                    <p class="text-sg-grey">Whisper STT intégré</p>
+                </div>
+            </div>
+
+            <!-- Services Bancaires -->
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-gradient-to-br from-red-50 to-white p-8 rounded-xl border-2 border-sg-red card-hover">
+                    <div class="text-5xl mb-4">💰</div>
+                    <h3 class="text-2xl font-bold mb-4 text-sg-black">Simulateur de Prêt</h3>
+                    <ul class="space-y-2 text-sg-grey">
+                        <li>✓ Calcul mensualités temps réel</li>
+                        <li>✓ Taux personnalisés</li>
+                        <li>✓ Vérification éligibilité</li>
+                        <li>✓ 4 types de prêts</li>
+                    </ul>
+                </div>
+                <div class="bg-gradient-to-br from-blue-50 to-white p-8 rounded-xl border-2 border-blue-500 card-hover">
+                    <div class="text-5xl mb-4">💼</div>
+                    <h3 class="text-2xl font-bold mb-4 text-sg-black">Ouverture de Compte</h3>
+                    <ul class="space-y-2 text-sg-grey">
+                        <li>✓ Collecte conversationnelle</li>
+                        <li>✓ Validation temps réel</li>
+                        <li>✓ 4 types de comptes</li>
+                        <li>✓ Leads qualifiés</li>
+                    </ul>
+                </div>
+                <div class="bg-gradient-to-br from-orange-50 to-white p-8 rounded-xl border-2 border-orange-500 card-hover">
+                    <div class="text-5xl mb-4">⚠️</div>
+                    <h3 class="text-2xl font-bold mb-4 text-sg-black">Réclamations</h3>
+                    <ul class="space-y-2 text-sg-grey">
+                        <li>✓ Catégorisation auto</li>
+                        <li>✓ Collecte structurée</li>
+                        <li>✓ ID unique tracking</li>
+                        <li>✓ Statut temps réel</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Architecture Section -->
+    <section id="architecture" class="py-20 bg-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-sg-black mb-4">📋 Architecture Technique</h2>
+                <p class="text-xl text-sg-grey">Une stack moderne et performante</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Backend -->
+                <div class="bg-white p-8 rounded-xl shadow-lg">
+                    <h3 class="text-2xl font-bold mb-6 text-sg-red">Backend</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <span class="text-2xl mr-3">⚡</span>
+                            <div>
+                                <p class="font-semibold">Framework</p>
+                                <p class="text-sg-grey">FastAPI (asynchrone)</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <span class="text-2xl mr-3">🗄️</span>
+                            <div>
+                                <p class="font-semibold">Base de données</p>
+                                <p class="text-sg-grey">SQLite (dev)</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <span class="text-2xl mr-3">🧠</span>
+                            <div>
+                                <p class="font-semibold">LLM</p>
+                                <p class="text-sg-grey">Google Gemini 2.5 Flash</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <span class="text-2xl mr-3">📚</span>
+                            <div>
+                                <p class="font-semibold">Vector Store</p>
+                                <p class="text-sg-grey">ChromaDB + HuggingFace</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Frontend & Intégrations -->
+                <div class="bg-white p-8 rounded-xl shadow-lg">
+                    <h3 class="text-2xl font-bold mb-6 text-sg-red">Frontend & Intégrations</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <span class="text-2xl mr-3">🎨</span>
+                            <div>
+                                <p class="font-semibold">Interface Web</p>
+                                <p class="text-sg-grey">HTML + Tailwind CSS + JS</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <span class="text-2xl mr-3">📊</span>
+                            <div>
+                                <p class="font-semibold">Analytics</p>
+                                <p class="text-sg-grey">Streamlit Dashboard</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <span class="text-2xl mr-3">💬</span>
+                            <div>
+                                <p class="font-semibold">WhatsApp</p>
+                                <p class="text-sg-grey">Twilio API</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <span class="text-2xl mr-3">🌐</span>
+                            <div>
+                                <p class="font-semibold">Web Scraping</p>
+                                <p class="text-sg-grey">BeautifulSoup + httpx</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Installation Section -->
+    <section id="installation" class="py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-sg-black mb-4">🚀 Installation Rapide</h2>
+                <p class="text-xl text-sg-grey">Déployez Tokosel en 5 minutes</p>
+            </div>
+
+            <div class="space-y-6">
+                <!-- Étape 1 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-sg-red">
+                    <h3 class="text-xl font-bold mb-3 text-sg-black">1️⃣ Cloner le projet</h3>
+                    <div class="bg-sg-black text-white p-4 rounded-lg font-mono text-sm overflow-x-auto">
+                        git clone https://github.com/tokosel/chatbot-bancaire<br>
+                        cd chatbot-bancaire
+                    </div>
+                </div>
+
+                <!-- Étape 2 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-sg-red">
+                    <h3 class="text-xl font-bold mb-3 text-sg-black">2️⃣ Créer l'environnement virtuel</h3>
+                    <div class="bg-sg-black text-white p-4 rounded-lg font-mono text-sm overflow-x-auto">
+                        python -m venv env<br>
+                        <span class="text-gray-400"># Windows</span><br>
+                        env\Scripts\activate<br>
+                        <span class="text-gray-400"># Linux/Mac</span><br>
+                        source env/bin/activate
+                    </div>
+                </div>
+
+                <!-- Étape 3 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-sg-red">
+                    <h3 class="text-xl font-bold mb-3 text-sg-black">3️⃣ Installer les dépendances</h3>
+                    <div class="bg-sg-black text-white p-4 rounded-lg font-mono text-sm">
+                        pip install -r requirements.txt
+                    </div>
+                </div>
+
+                <!-- Étape 4 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-sg-red">
+                    <h3 class="text-xl font-bold mb-3 text-sg-black">4️⃣ Configurer .env</h3>
+                    <div class="bg-sg-black text-white p-4 rounded-lg font-mono text-sm overflow-x-auto">
+                        GOOGLE_API_KEY=AIzaSy...<br>
+                        TWILIO_ACCOUNT_SID=AC...<br>
+                        TWILIO_AUTH_TOKEN=...
+                    </div>
+                </div>
+
+                <!-- Étape 5 -->
+                <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-sg-red">
+                    <h3 class="text-xl font-bold mb-3 text-sg-black">5️⃣ Démarrer l'application</h3>
+                    <div class="bg-sg-black text-white p-4 rounded-lg font-mono text-sm overflow-x-auto">
+                        <span class="text-gray-400"># Backend (API)</span><br>
+                        cd backend<br>
+                        uvicorn main:app --reload<br><br>
+                        <span class="text-gray-400"># Frontend (Flask)</span><br>
+                        python app.py<br><br>
+                        <span class="text-gray-400"># Dashboard</span><br>
+                        streamlit run dashboard.py
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-12 text-center">
+                <a href="#documentation" class="inline-block bg-sg-red text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-red-700 transition">
+                    📖 Documentation Complète
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section id="demo" class="py-20 bg-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-sg-black mb-4">💡 Exemples d'Utilisation</h2>
+                <p class="text-xl text-sg-grey">Découvrez Tokosel en action</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Simulation Prêt -->
+                <div class="bg-white p-8 rounded-xl shadow-lg">
+                    <h3 class="text-2xl font-bold mb-6 text-sg-red flex items-center">
+                        <span class="mr-3">💰</span> Simulation de Prêt
+                    </h3>
+                    <div class="space-y-4 text-sm">
+                        <div class="flex">
+                            <span class="font-bold text-blue-600 mr-2">User:</span>
+                            <span class="text-sg-grey">Je veux emprunter 10 millions</span>
+                        </div>
+                        <div class="flex">
+                            <span class="font-bold text-sg-red mr-2">Bot:</span>
+                            <span class="text-sg-grey">Quel montant souhaitez-vous emprunter ?</span>
+                        </div>
+                        <div class="flex">
+                            <span class="font-bold text-blue-600 mr-2">User:</span>
+                            <span class="text-sg-grey">10 millions</span>
+                        </div>
+                        <div class="flex">
+                            <span class="font-bold text-sg-red mr-2">Bot:</span>
+                            <span class="text-sg-grey">Sur combien de temps ?</span>
+                        </div>
+                        <div class="flex">
+                            <span class="font-bold text-blue-600 mr-2">User:</span>
+                            <span class="text-sg-grey">15 ans</span>
+                        </div>
+                        <div class="bg-green-50 p-4 rounded-lg mt-4 border-l-4 border-green-500">
+                            <p class="font-bold text-green-800">📊 RÉSULTATS</p>
+                            <p class="text-sm text-green-700 mt-2">💳 MENSUALITÉ : 88 849 FCFA</p>
+                            <p class="text-sm text-green-700">Taux : 6.0% / an</p>
+                            <p class="text-sm text-green-700">✅ Éligible !</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ouverture Compte -->
+                <div class="bg-white p-8 rounded-xl shadow-lg">
+                    <h3 class="text-2xl font-bold mb-6 text-sg-red flex items-center">
+                        <span class="mr-3">💼</span> Ouverture de Compte
+                    </h3>
+                    <div class="space-y-4 text-sm">
+                        <div class="flex">
+                            <span class="font-bold text-blue-600 mr-2">User:</span>
+                            <span class="text-sg-grey">Je veux ouvrir un compte</span>
+                        </div>
+                        <div class="flex">
+                            <span class="font-bold text-sg-red mr-2">Bot:</span>
+                            <span class="text-sg-grey">Quel type de compte vous intéresse ?</span>
+                        </div>
+                        <div class="bg-gray-50 p-3 rounded-lg">
+                            <div class="grid grid-cols-2 gap-2">
+                                <button class="bg-white border-2 border-gray-200 px-3 py-2 rounded text-xs hover:border-sg-red">Courant</button>
+                                <button class="bg-white border-2 border-gray-200 px-3 py-2 rounded text-xs hover:border-sg-red">Épargne</button>
+                                <button class="bg-white border-2 border-gray-200 px-3 py-2 rounded text-xs hover:border-sg-red">Jeune</button>
+                                <button class="bg-white border-2 border-gray-200 px-3 py-2 rounded text-xs hover:border-sg-red">Entreprise</button>
+                            </div>
+                        </div>
+                        <div class="flex">
+                            <span class="font-bold text-blue-600 mr-2">User:</span>
+                            <span class="text-sg-grey">Compte Courant</span>
+                        </div>
+                        <div class="flex">
+                            <span class="font-bold text-sg-red mr-2">Bot:</span>
+                            <span class="text-sg-grey">Quel est votre nom ?</span>
+                        </div>
+                        <div class="flex">
+                            <span class="font-bold text-blue-600 mr-2">User:</span>
+                            <span class="text-sg-grey">DIOP Fatou</span>
+                        </div>
+                        <div class="bg-blue-50 p-4 rounded-lg mt-4 border-l-4 border-blue-500">
+                            <p class="font-bold text-blue-800">✅ Demande enregistrée</p>
+                            <p class="text-sm text-blue-700 mt-2">ID: PROS_20251210_847</p>
+                            <p class="text-sm text-blue-700">Contact sous 48h</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-20 bg-sg-black text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold mb-4">📊 Performances en Chiffres</h2>
+            </div>
+            <div class="grid md:grid-cols-4 gap-8 text-center">
+                <div>
+                    <div class="text-5xl font-bold text-sg-red mb-2">< 10000ms</div>
+                    <p class="text-gray-300">Latence moyenne</p>
+                </div>
+                <div>
+                    <div class="text-5xl font-bold text-sg-red mb-2">95%</div>
+                    <p class="text-gray-300">Précision RAG</p>
+                </div>
+                <div>
+                    <div class="text-5xl font-bold text-sg-red mb-2">24/7</div>
+                    <p class="text-gray-300">Disponibilité</p>
+                </div>
+                <div>
+                    <div class="text-5xl font-bold text-sg-red mb-2">2</div>
+                    <p class="text-gray-300">Canaux (Web + WhatsApp)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Documentation Links -->
+    <section id="documentation" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-sg-black mb-4">📚 Documentation</h2>
+                <p class="text-xl text-sg-grey">Toutes les ressources pour démarrer</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <a href="https://github.com/tokosel/chatbot-bancaire" target="_blank" 
+                   class="bg-gray-50 p-8 rounded-xl text-center hover:shadow-xl transition card-hover">
+                    <div class="text-5xl mb-4">📖</div>
+                    <h3 class="text-xl font-bold mb-2 text-sg-black">README complet</h3>
+                    <p class="text-sg-grey">Guide d'installation détaillé</p>
+                </a>
+                <a href="https://fastapi.tiangolo.com/" target="_blank" 
+                   class="bg-gray-50 p-8 rounded-xl text-center hover:shadow-xl transition card-hover">
+                    <div class="text-5xl mb-4">⚡</div>
+                    <h3 class="text-xl font-bold mb-2 text-sg-black">FastAPI Docs</h3>
+                    <p class="text-sg-grey">Documentation officielle</p>
+                </a>
+                <a href="https://www.twilio.com/docs/whatsapp" target="_blank" 
+                   class="bg-gray-50 p-8 rounded-xl text-center hover:shadow-xl transition card-hover">
+                    <div class="text-5xl mb-4">💬</div>
+                    <h3 class="text-xl font-bold mb-2 text-sg-black">Twilio WhatsApp</h3>
+                    <p class="text-sg-grey">API WhatsApp Business</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-sg-black text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-10 h-10 bg-sg-red rounded-full flex items-center justify-center">
+                            <span class="text-white text-2xl">🔴</span>
+                        </div>
+                        <span class="text-2xl font-bold">Tokosel</span>
+                    </div>
+                    <p class="text-gray-400">L'assistant bancaire intelligent qui révolutionne l'expérience client.</p>
+                </div>
+                <div>
+                    <h3 class="font-bold mb-4">Liens Rapides</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#features" class="hover:text-white transition">Fonctionnalités</a></li>
+                        <li><a href="#architecture" class="hover:text-white transition">Architecture</a></li>
+                        <li><a href="#installation" class="hover:text-white transition">Installation</a></li>
+                        <li><a href="#documentation" class="hover:text-white transition">Documentation</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-bold mb-4">Auteurs</h3>
+                    <p class="text-gray-400">
+                        <strong>Développement :</strong> Abdoulaye SALL<br>
+                        <strong>Encadrement :</strong> Pr Fodé CAMARA, M. Mamadou SARR<br>
+                        <strong>Établissement :</strong> CRD - UADB, Sénégal
+                    </p>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>© 2025 Tokosel - CRD - UADB. MIT License.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
